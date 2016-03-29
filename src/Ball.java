@@ -12,7 +12,7 @@ public class Ball extends GameEntity {
 	private int dy;		//>>
 	
 	public Ball(int gameWidth, int gameHeight, int size, int startX, int startY, int speed){
-		super(gameWidth, gameHeight, size, size, startX, startY, speed);
+		super(gameWidth, gameHeight, size, size, 250, 550, speed);
 		this.dx = this.speed;		//>>
 		this.dy = this.speed;		//>>
 	}
@@ -46,6 +46,15 @@ public class Ball extends GameEntity {
 		//dx = -dx;
 		dy = -dy;
 	}
-	
+	public void leftsidemove(){
+		//dy = -this.speed;
+		//dx = -dx;
+		dx = dx - 3;
+	}
+        public void rightsidemove(){
+		//dy = -this.speed;
+		//dx = -dx;
+		dx = dx + 3;
+	}
 	
 }

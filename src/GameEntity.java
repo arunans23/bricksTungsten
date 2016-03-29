@@ -24,8 +24,8 @@ public abstract class GameEntity {
 		this.gameWidth = gameWidth;
 		this.gameHeight = gameHeight;
 		
-		this.x = startX;
-		this.y = startY;
+		this.x = startX ;
+		this.y = startY ;
 		
 		this.width = width;
 		this.height = height;
