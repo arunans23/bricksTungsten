@@ -11,6 +11,7 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -26,12 +27,14 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Game extends Canvas implements KeyListener {
 
     private static final long serialVersionUID = 1L;
-
+    
+    
     BufferedImage buffer; // Create the buffer
 
     BufferedImage bgImg; // Create the buffer
@@ -48,11 +51,18 @@ public class Game extends Canvas implements KeyListener {
     boolean isKeySpace = false;
     boolean gameFinished;
     int score;
+    
+    Dimension dim;
 
     /**
      * Create the game using the width and the height specified
      */
     public Game(Dimension dim) {
+        this.dim = dim;
+        reset(this.dim);
+    }
+
+    public void reset(Dimension dim){
         buffer = new BufferedImage(dim.width, dim.height,
                 BufferedImage.TYPE_INT_RGB);
         int ballStartX = 0;
@@ -81,21 +91,28 @@ public class Game extends Canvas implements KeyListener {
 
         this.setIgnoreRepaint(true); // Ignore repainting as we are doing all
         // the drawing stuff
+        isKeyLeft = false;
+        isKeyRight = false;
     }
-
     /**
      * Start the game
      */
     public void Start() {
-
+        //JOptionPane.showMessageDialog(this, "Start the Game");
         while (!gameFinished) {
 
             // Check keys
             if (isKeyLeft) {
                 bat.setLeft();
+                if (!isKeySpace){
+                    //ball.setLeft();
+                }
             }
             if (isKeyRight) {
                 bat.setRight();
+                if (!isKeySpace){
+                    //ball.setRight();
+                }
             }
             // while(isKeySpace = false){
             // JOptionPane.showOptionDialog(null, "Hello","Empty?", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE, null, new Object[]{}, null);
@@ -105,18 +122,29 @@ public class Game extends Canvas implements KeyListener {
             }//}
 
             bat.update();
+//
+//            JLabel jlabel = new JLabel("Score : " + score);
+//            jlabel.setFont(new Font("Verdana", 10, 10));
+//            jlabel.setSize(25, 25);
+//            jlabel.setLocation(10, 580);
 
             // Collision detection
             detectCollision();
 
             if (bricks.size() == 0) {
                 gameFinished = true;
-                JOptionPane.showMessageDialog(this, "You Won");
+                JOptionPane.showMessageDialog(this, "You Won" + "\nYou want to Restart");
+                gameFinished = false;
+                reset(dim);
             }
             if (ball.getY() > bat.getY() + 10) {
                 gameFinished = true;
                 
-                JOptionPane.showMessageDialog(this, "Game Over \n score:" + score);
+                JOptionPane.showMessageDialog(this, "Game Over \n score:" + score + "\nYou want to Restart?");
+                gameFinished = false;
+                
+                reset(dim);
+                
                 
             }
             // Draw the buffer

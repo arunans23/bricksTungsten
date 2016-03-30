@@ -49,12 +49,18 @@ public class Ball extends GameEntity {
 	public void leftsidemove(){
 		//dy = -this.speed;
 		//dx = -dx;
-		dx = dx - 3;
+		dx = dx - 5;
 	}
         public void rightsidemove(){
 		//dy = -this.speed;
 		//dx = -dx;
-		dx = dx + 3;
+		dx = dx + 5;
 	}
-	
+//	public void setRight(){
+//            x += dx;
+//        }
+//        
+//        public void setLeft(){
+//            x -= dx;
+//        }
 }
